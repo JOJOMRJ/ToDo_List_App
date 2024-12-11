@@ -3,12 +3,15 @@ import React from 'react'
 const LogsFilter = (props) => {
   let years = [...new Set(props.logsData.map((item) => item.date.getFullYear()))]
   const changeHandler = (event) => {
-    props.onChangeYear(+event.target.value)
+    const selectedValue = event.target.value;
+    const year = selectedValue === "all" ? "all" : +selectedValue;
+    props.onChangeYear(year)
   }
   return (
     <div>
       <label htmlFor="year">年份:</label>
       <select name="year" id="year" onChange={changeHandler}>
+        <option value="all">全部年份</option>
         {years.map((year) => (
           <option key={year} value={year}>{year}</option>
         ))}

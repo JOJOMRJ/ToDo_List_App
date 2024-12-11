@@ -4,7 +4,7 @@ const Delete = (props) => {
   
   
   const { id, logsData, onUploadLogs } = props
-  console.log('del里',onUploadLogs);
+  // console.log('del里',onUploadLogs);
   
   
   // const deleteHandler = (logsData)=>{
