@@ -1,0 +1,13 @@
+{
+  "workbench.tree.indent": 20,
+  "workbench.tree.renderIndentGuides": "always",
+  "workbench.colorCustomizations": {
+  "tree.indentGuidesStroke": "#FFAB00", // 设置缩进线的颜色
+  "list.activeSelectionBackground": "#3C3C3C", // 选中背景色
+  "list.activeSelectionForeground": "#FFFFFF", // 选中文件名的颜色
+  "list.inactiveSelectionBackground": "#2D2D30", // 非活跃选中背景色
+  "list.hoverBackground": "#292929", // 鼠标悬浮时的背景色
+  "list.dropBackground": "#383B4A" // 拖动文件时的背景色
+} 
+}
+
