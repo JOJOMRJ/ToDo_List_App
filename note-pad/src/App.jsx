@@ -33,6 +33,8 @@ function App() {
   }, []);
 
   const uploadLogHandler = (newLogData) => {
+    console.log("APP里的更定数据");
+    
     setLogsData(newLogData);
     localStorage.setItem('logsData', JSON.stringify(newLogData));
   };

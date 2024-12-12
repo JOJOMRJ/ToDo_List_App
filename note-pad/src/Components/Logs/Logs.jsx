@@ -58,6 +58,7 @@ const Logs = (props) => {
       date={item.date}
       desc={item.desc}
       time={item.time}
+      isCompleted={item.isCompleted}
       logsData={props.logsData}
       onUploadLogs={props.onUploadLogs}
     />
