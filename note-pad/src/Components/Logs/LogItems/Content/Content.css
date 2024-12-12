@@ -1,0 +1,16 @@
+/* 日志内容  */
+.content {
+  flex: auto;
+  text-align: center;
+}
+
+/* 描述内容 */
+.desc {
+  font-size: 16px;
+  color: #646434;
+}
+
+/* 学习时间 */
+.time{
+  color: #D62828;
+}
