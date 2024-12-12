@@ -9,7 +9,6 @@ const LogItem = (props) => {
   
   
   const toggleCompletionHandler = () => {
-    console.log('我出发了');
     const updatedLogs = props.logsData.map((log) => {
       if (log.id === props.id) {
         return { ...log, isCompleted: !log.isCompleted }; // 切换完成状态
@@ -18,7 +17,7 @@ const LogItem = (props) => {
     });
     props.onUploadLogs(updatedLogs); // 更新父组件的状态
   };
-  console.log('当前 isCompleted:', props.isCompleted);
+  // console.log('当前 isCompleted:', props.isCompleted);
   return (
     <Card className="item">
       <MyDate date={props.date} />

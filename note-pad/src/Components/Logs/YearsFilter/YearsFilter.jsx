@@ -10,8 +10,8 @@ const YearsFilter = (props) => {
   return (
     <div>
       <label htmlFor="year">年份:</label>
-      <select name="year" id="year" onChange={changeHandler}>
-        <option value={props.seletedYear}>全部年份</option>
+      <select name="year" id="year" onChange={changeHandler} value={props.seletedYear}>
+        <option value='all'>全部年份</option>
         {years.map((year) => (
           <option key={year} value={year}>{year}</option>
         ))}
