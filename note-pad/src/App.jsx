@@ -9,8 +9,12 @@ function App() {
 
   const loadLogsDataFromLocalStorage = () => {
     const storedLogsData = localStorage.getItem('logsData');    
-    if (storedLogsData) {      
-      return JSON.parse(storedLogsData);
+    if (storedLogsData) {
+      const parsedData = JSON.parse(storedLogsData);
+      // 检查是否是一个空数组
+      if (Array.isArray(parsedData) && parsedData.length > 0) {
+        return parsedData;
+      }
     }
     return null;
   };

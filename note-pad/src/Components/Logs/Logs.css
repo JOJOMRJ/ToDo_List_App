@@ -8,3 +8,8 @@
   font-size: 30px;
   font-weight: bold;
 }
+
+.filter-container {
+  display: flex;
+  margin-bottom: 20px;
+}

@@ -71,13 +71,10 @@ const Logs = (props) => {
 
   return (
     <Card className="logs">
-      {/* 年份筛选 */}
-      <YearsFilter logsData={props.logsData} onChangeYear={yearChangeHandler} seletedYear={year} />
-      
-      {/* 完成状态筛选 */}
-      <CompletionFilter onChangeCompletion={completionChangeHandler}  selectedValue={completion}/>
-      
-      {/* 日志条目 */}
+      <div className='filter-container'>
+        <YearsFilter logsData={props.logsData} onChangeYear={yearChangeHandler} seletedYear={year} />
+        <CompletionFilter onChangeCompletion={completionChangeHandler}  selectedValue={completion}/>
+      </div>
       {logItemData}
     </Card>
   );
