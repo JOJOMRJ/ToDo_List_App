@@ -8,8 +8,8 @@ function App() {
   const [logsData, setLogsData] = useState([]);
 
   const loadLogsDataFromLocalStorage = () => {
-    const storedLogsData = localStorage.getItem('logsData');
-    if (storedLogsData) {
+    const storedLogsData = localStorage.getItem('logsData');    
+    if (storedLogsData) {      
       return JSON.parse(storedLogsData);
     }
     return null;
