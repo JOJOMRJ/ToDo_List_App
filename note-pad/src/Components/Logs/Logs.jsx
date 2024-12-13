@@ -4,6 +4,7 @@ import LogItem from './LogItems/LogItem';
 import './Logs.css';
 import YearsFilter from './YearsFilter/YearsFilter';
 import { useState } from 'react';
+import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 
 const Logs = (props) => {
   const [year, setYear] = useState('all'); // 当前年份筛选
@@ -50,33 +51,70 @@ const Logs = (props) => {
     )
   );
 
-  // 渲染日志条目
-  let logItemData = filteredLogsData.map((item) => (
-    <LogItem
-      key={item.id}
-      id={item.id}
-      date={item.date}
-      desc={item.desc}
-      time={item.time}
-      isCompleted={item.isCompleted}
-      logsData={props.logsData}
-      onUploadLogs={props.onUploadLogs}
-    />
-  ));
+  // 拖拽结束处理函数
+  const onDragEnd = (result) => {
+    if (!result.destination) {
+      return;
+    }
+    const reorderedLogs = Array.from(filteredLogsData);
+    const [movedItem] = reorderedLogs.splice(result.source.index, 1);
+    reorderedLogs.splice(result.destination.index, 0, movedItem);
 
-  // 如果没有日志，显示提示
-  if (filteredLogsData.length === 0) {
-    logItemData = <h2>No logs found</h2>;
-  }
+    // 将重新排序的日志更新到 props 的回调中
+    props.onUploadLogs(reorderedLogs);
+  };
 
   return (
-    <Card className="logs">
-      <div className='filter-container'>
-        <YearsFilter logsData={props.logsData} onChangeYear={yearChangeHandler} seletedYear={year} />
-        <CompletionFilter onChangeCompletion={completionChangeHandler}  selectedValue={completion}/>
-      </div>
-      {logItemData}
-    </Card>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <Card className="logs">
+        <div className="filter-container">
+          <YearsFilter
+            logsData={props.logsData}
+            onChangeYear={yearChangeHandler}
+            selectedYear={year}
+          />
+          <CompletionFilter
+            onChangeCompletion={completionChangeHandler}
+            selectedValue={completion}
+          />
+        </div>
+        <Droppable droppableId="logs">
+          {(provided) => (
+            <div
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+            >
+              {filteredLogsData.length > 0 ? (
+                filteredLogsData.map((item, index) => (
+                  <Draggable key={item.id} draggableId={item.id} index={index}>
+                    {(provided) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        <LogItem
+                          id={item.id} 
+                          date={item.date}
+                          desc={item.desc}
+                          time={item.time}
+                          isCompleted={item.isCompleted}
+                          logsData={props.logsData}
+                          onUploadLogs={props.onUploadLogs}
+                        />
+                      </div>
+                    )}
+                  </Draggable>
+                ))
+              ) : (
+                <h2>No logs found</h2>
+              )}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </Card>
+    </DragDropContext>
   );
 };
 
